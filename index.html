@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprobante Nequi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #ffffff;
+        }
+
+        .container {
+            width: 1170px;
+            height: 2400px;
+            margin: 0 auto;
+        }
+
+        .header-image {
+            width: 100%;
+            height: 865px;
+        }
+
+        .middle {
+            font-family: 'Manrope', sans-serif;
+            width: calc(100% - 180px);
+            margin: 10px auto;
+            padding-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .details {
+            font-size: 44px;
+            line-height: 1.5;
+            color: #1C081D;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .details p {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            font-size: 44px;
+            color: #1C081D;
+            margin-bottom: 7px;
+        }
+
+        .dark-text {
+            color: #1C081D;
+        }
+
+        .disponible-text {
+            color: #000000;
+            font-weight: 600;
+        }
+
+        .disponible-text span {
+            color: #7f7f7f;
+            font-weight: 400;
+        }
+
+        .plata {
+            font-family: 'Manrope', sans-serif;
+            font-size: 42px;
+            color: #7f7f7f;
+            display: flex;
+            align-items: center;
+            margin-top: -60px;
+            margin-bottom: 20px;
+        }
+
+        .funds {
+            font-size: 44px;
+            color: #7f7f7f;
+            padding: 0 10px;
+            margin: 0px;
+            margin-top: -30px;
+        }
+
+        .balance {
+            display: flex;
+            align-items: center;
+            border: 2px solid #bbb;
+            padding: 20px;
+            border-radius: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 0px;
+        }
+
+        .balance img {
+            width: 150px;
+            margin-right: 10px;
+        }
+
+        .footer {
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            margin-top: 0px;
+        }
+
+        .footer-content {
+            margin-bottom: 15px;
+        }
+
+        .footer-text {
+            color: #DB0083;
+            text-decoration: underline;
+            font-size: 47px;
+            font-weight: 600;
+        }
+
+        /* Formulario */
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+            background-color: #e9ecef;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .download-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background-color: #218838;
+        }
+
+        .download-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Selector de beneficiarios -->
+    <div class="form-container">
+        <div class="download-container" style="display:none;">
+            <button id="downloadBtn" class="download-btn">Descargar Comprobante</button>
+        </div>
+        <label for="beneficiario">Beneficiario:</label>
+        <select id="beneficiario" required>
+            <option value="">Seleccione un beneficiario</option>
+            <option value="nuevo">Agregar nuevo beneficiario</option>
+        </select>
+
+        <!-- Formulario para pedir los datos -->
+        <form id="comprobanteForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" placeholder="Escribe el nombre" readonly>
+
+            <label for="numero">Número de Cuenta:</label>
+            <input type="tel" id="numero" placeholder="Escribe el número de cuenta" readonly>
+
+            <label for="banco">Banco:</label>
+            <input type="text" id="banco" readonly>
+
+            <label for="monto">¿Cuánto?</label>
+            <input type="number" id="monto" placeholder="Escribe el monto" required>
+
+            <label for="referencia">Referencia:</label>
+            <input type="text" id="referencia" readonly>
+
+            <button type="submit">Generar Comprobante</button>
+        </form>
+    </div>
+
+    <!-- Comprobante -->
+    <div id="comprobante" class="container" style="display:none;">
+        <div class="header">
+            <img src="images/arriba.jpg" alt="Encabezado" class="header-image">
+        </div>
+        <div class="middle">
+            <div class="details">
+                <p><span class="label">Pago en</span><br><span id="nombreDisplay" class="dark-text"></span></p>
+                <p><span class="label">Banco</span><br><span class="dark-text">Bancolombia</span></p>
+                <p><span class="label">Número de Cuenta</span><br><span id="numeroDisplay" class="dark-text"></span></p>
+                <p><span class="label">¿Cuánto?</span><br><span id="montoDisplay" class="dark-text"></span></p>
+                <p><span class="label">Fecha</span><br><span id="fechaDisplay" class="dark-text"></span></p>
+                <p><span class="label" style=" margin-bottom: 10px;">Referencia</span><br><span id="referenciaDisplay"
+                        class="dark-text" style=" margin-bottom: 10px;"></span></p>
+            </div>
+        </div>
+        <div class="funds">
+            <div class="plata">
+                <p>¿De dónde salió la plata?</p>
+            </div>
+            <div class="balance">
+                <img src="images/cosio.jpg" alt="Disponible">
+                <p class="disponible-text">Disponible<br><span id="montoDisponible">${montoFormateado}</span></p>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer-content">
+                <p class="footer-text">¿Algún problema con este movimiento?</p>
+            </div>
+        </div>
+        <img src="images/listo.JPG" style="width: 100%; height: 156px; margin-top: 20px;">
+    </div>
+
+    <!-- Script para la funcionalidad -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        function formatCurrency(value) {
+            const numero = parseFloat(value);
+            if (isNaN(numero)) {
+                return "$ 0,00"; // Valor predeterminado si el número no es válido
+            }
+
+            // Convertimos el número a string con dos decimales
+            let [entero, decimal] = numero.toFixed(2).split(".");
+
+            // Agregar puntos cada 3 dígitos para los miles
+            entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+            return "$ " + entero + "," + decimal; // Formato con miles y decimales
+        }
+        let datos = [];
+
+        // Función para cargar los datos del archivo JSON
+        async function cargarDatos() {
+            try {
+                const response = await fetch('datos.json');
+                datos = await response.json();
+                const select = document.getElementById('beneficiario');
+
+                // Agregar opciones al select
+                datos.forEach((item, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = item.nombre;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error cargando los datos:', error);
+            }
+        }
+
+        // Cargar los datos cuando la página se carga
+        window.onload = cargarDatos;
+
+        // Autocompletar el formulario cuando se selecciona un beneficiario
+        document.getElementById('beneficiario').addEventListener('change', function () {
+            const index = this.value;
+            if (index === "nuevo") {
+                // Limpiar campos para agregar nuevo usuario
+                document.getElementById('nombre').readOnly = false;
+                document.getElementById('numero').readOnly = false;
+                document.getElementById('banco').readOnly = false;
+                document.getElementById('referencia').readOnly = false;
+
+                document.getElementById('nombre').value = '';
+                document.getElementById('numero').value = '';
+                document.getElementById('banco').value = '';
+                document.getElementById('referencia').value = '';
+            } else if (index) {
+                const seleccionado = datos[index];
+                document.getElementById('nombre').value = seleccionado.nombre;
+                document.getElementById('numero').value = seleccionado.numero;
+                document.getElementById('banco').value = seleccionado.banco;
+                document.getElementById('referencia').value = seleccionado.referencia;
+
+                // Hacer campos de beneficiario de solo lectura
+                document.getElementById('nombre').readOnly = true;
+                document.getElementById('numero').readOnly = true;
+                document.getElementById('banco').readOnly = true;
+                document.getElementById('referencia').readOnly = true;
+            }
+        });
+
+        document.getElementById('comprobanteForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Obtener los valores del formulario
+            const nombre = document.getElementById('nombre').value;
+            const monto = document.getElementById('monto').value;
+            const numero = document.getElementById('numero').value;
+            const referencia = document.getElementById('referencia').value;
+            const fechaFormateada = formatFecha();
+
+            // Convertir monto a número y luego formatearlo
+            const montoFormateado = formatCurrency(monto);
+
+            // Actualizar los valores en el comprobante
+            document.getElementById('nombreDisplay').innerText = nombre;
+            document.getElementById('montoDisplay').innerText = montoFormateado;
+            document.getElementById('numeroDisplay').innerText = numero;
+            document.getElementById('referenciaDisplay').innerText = referencia;
+            document.getElementById('fechaDisplay').innerText = fechaFormateada;
+            document.getElementById('montoDisponible').innerText = montoFormateado;
+
+            // Mostrar el comprobante y el botón de descarga
+            document.getElementById('comprobante').style.display = 'block';
+            document.querySelector('.download-container').style.display = 'block';
+        });
+
+
+
+        // Función para formatear la fecha
+        function formatFecha() {
+            const fecha = new Date();
+            const dia = fecha.getDate();
+            const meses = [
+                "enero", "febrero", "marzo", "abril", "mayo", "junio",
+                "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+            ];
+            const mes = meses[fecha.getMonth()];
+            const año = fecha.getFullYear();
+            let horas = fecha.getHours();
+            const minutos = fecha.getMinutes().toString().padStart(2, "0");
+            const ampm = horas >= 12 ? 'p.m.' : 'a.m.';
+            horas = horas % 12;
+            horas = horas ? horas : 12;
+            return `${dia} de ${mes} de ${año} a las ${horas}:${minutos} ${ampm}`;
+        }
+
+        // Funcionalidad para descargar el comprobante
+        document.getElementById('downloadBtn').addEventListener('click', function () {
+            const comprobante = document.getElementById('comprobante');
+
+            html2canvas(comprobante, {
+                scale: 1,
+                width: 1170,
+                height: 2400
+            }).then(function (canvas) {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'comprobante.png';
+                link.click();
+            });
+        });
+    </script>
+</body>
+
+</html>
