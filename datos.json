@@ -1,21 +1,16 @@
 [
     {
-      "nombre": "Juan Pérez",
-      "monto": ,
-      "numeroNequi": "3001234567",
-      "referencia": "ABC123"
+      "nombre": "Ismelda Trivino",
+      "numero": "03222544210",
+      "banco": "Bancolombia",
+      "referencia": "M52010"
+
     },
     {
-      "nombre": "Ana Gómez",
-      "monto": 850.75,
-      "numeroNequi": "3107654321",
-      "referencia": "XYZ789"
-    },
-    {
-      "nombre": "Carlos Ramírez",
-      "monto": 2250.00,
-      "numeroNequi": "3209876543",
-      "referencia": "LMN456"
+      "nombre": "Maria Lopez",
+      "numero": "10987654321",
+      "pagoEn": "Nequi",
+      "banco": "Nequi"
     }
   ]
   
