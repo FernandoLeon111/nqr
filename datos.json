@@ -1,26 +1,14 @@
 [
     {
         "nombre": "Restaurante Tulpa Y Tiesto",
-        "numero": "03222544210",
-        "banco": "Bancolombia",
-        "referencia": "M6662292"
+        "referencia": "M6622392"
     },
     {
-        "nombre": "Ismelda Trivino",
-        "numero": "03222544210",
-        "banco": "Bancolombia",
-        "referencia": "M83110247"
+        "nombre": "María Rodríguez",
+        "referencia": "M2345678"
     },
     {
-        "nombre": "Biviana Barragan",
-        "numero": "84742919195",
-        "banco": "Bancolombia",
-        "referencia": "M3487888"
-    },
-    {
-        "nombre": "prueba",
-        "numero": "",
-        "banco": "",
-        "referencia": ""
-    },
+        "nombre": "Carlos López",
+        "referencia": "M3456789"
+    }
 ]
