@@ -27,7 +27,7 @@
 
         .header-image {
             width: 100%;
-            height: 865px;
+            height: 1087px;
         }
 
         .middle {
@@ -38,13 +38,14 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            
         }
 
         .details {
             font-size: 44px;
-            line-height: 1.5;
+            font-weight:600;
+            line-height: 2;
             color: #1C081D;
-            font-weight: 400;
             margin-bottom: 30px;
         }
 
@@ -53,13 +54,14 @@
         }
 
         .label {
-            font-size: 44px;
-            color: #1C081D;
-            margin-bottom: 7px;
+            font-size: 40px;
+            color: #7f7f7f;
+font-weight: lighter;
         }
 
         .dark-text {
             color: #1C081D;
+            font-weight: 10;
         }
 
         .disponible-text {
@@ -152,6 +154,7 @@
             font-size: 14px;
             margin-bottom: 5px;
             color: #333;
+            
         }
 
         input {
@@ -203,6 +206,7 @@
             text-align: center;
             margin-top: 20px;
         }
+        
     </style>
 </head>
 
@@ -224,11 +228,7 @@
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" placeholder="Escribe el nombre" readonly>
 
-            <label for="numero">Número de Cuenta:</label>
-            <input type="tel" id="numero" placeholder="Escribe el número de cuenta" readonly>
-
-            <label for="banco">Banco:</label>
-            <input type="text" id="banco" readonly>
+      
 
             <label for="monto">¿Cuánto?</label>
             <input type="number" id="monto" placeholder="Escribe el monto" required>
@@ -248,8 +248,6 @@
         <div class="middle">
             <div class="details">
                 <p><span class="label">Pago en</span><br><span id="nombreDisplay" class="dark-text"></span></p>
-                <p><span class="label">Banco</span><br><span class="dark-text">Bancolombia</span></p>
-                <p><span class="label">Número de Cuenta</span><br><span id="numeroDisplay" class="dark-text"></span></p>
                 <p><span class="label">¿Cuánto?</span><br><span id="montoDisplay" class="dark-text"></span></p>
                 <p><span class="label">Fecha</span><br><span id="fechaDisplay" class="dark-text"></span></p>
                 <p><span class="label" style=" margin-bottom: 10px;">Referencia</span><br><span id="referenciaDisplay"
@@ -265,12 +263,10 @@
                 <p class="disponible-text">Disponible<br><span id="montoDisponible">${montoFormateado}</span></p>
             </div>
         </div>
-        <div class="footer">
-            <div class="footer-content">
-                <p class="footer-text">¿Algún problema con este movimiento?</p>
-            </div>
+        
+        <div width = 315px>
+
         </div>
-        <img src="images/listo.JPG" style="width: 100%; height: 156px; margin-top: 20px;">
     </div>
 
     <!-- Script para la funcionalidad -->
@@ -320,25 +316,17 @@
             if (index === "nuevo") {
                 // Limpiar campos para agregar nuevo usuario
                 document.getElementById('nombre').readOnly = false;
-                document.getElementById('numero').readOnly = false;
-                document.getElementById('banco').readOnly = false;
                 document.getElementById('referencia').readOnly = false;
 
                 document.getElementById('nombre').value = '';
-                document.getElementById('numero').value = '';
-                document.getElementById('banco').value = '';
                 document.getElementById('referencia').value = '';
             } else if (index) {
                 const seleccionado = datos[index];
                 document.getElementById('nombre').value = seleccionado.nombre;
-                document.getElementById('numero').value = seleccionado.numero;
-                document.getElementById('banco').value = seleccionado.banco;
                 document.getElementById('referencia').value = seleccionado.referencia;
 
                 // Hacer campos de beneficiario de solo lectura
                 document.getElementById('nombre').readOnly = true;
-                document.getElementById('numero').readOnly = true;
-                document.getElementById('banco').readOnly = true;
                 document.getElementById('referencia').readOnly = true;
             }
         });
@@ -349,7 +337,6 @@
             // Obtener los valores del formulario
             const nombre = document.getElementById('nombre').value;
             const monto = document.getElementById('monto').value;
-            const numero = document.getElementById('numero').value;
             const referencia = document.getElementById('referencia').value;
             const fechaFormateada = formatFecha();
 
@@ -359,7 +346,6 @@
             // Actualizar los valores en el comprobante
             document.getElementById('nombreDisplay').innerText = nombre;
             document.getElementById('montoDisplay').innerText = montoFormateado;
-            document.getElementById('numeroDisplay').innerText = numero;
             document.getElementById('referenciaDisplay').innerText = referencia;
             document.getElementById('fechaDisplay').innerText = fechaFormateada;
             document.getElementById('montoDisponible').innerText = montoFormateado;
